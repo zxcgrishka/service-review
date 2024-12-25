@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ teacher.name }}
+{% endblock %}
+
+{% block body %}
+<h1>{{ teacher.name }}</h1>
+<div class="teacher-detail">
+    <div class="teacher-photo">
+        {% if teacher.photo %}
+            <img src="data:image/jpeg;base64,{{ teacher.photo | b64encode }}" alt="{{ teacher.name }}">
+        {% else %}
+            <img src="{{ url_for('static', filename='no-photo.jpg') }}" alt="No photo available">
+        {% endif %}
+    </div>
+    <div class="teacher-info">
+        <h2>{{ teacher.job_title }}</h2>
+        <div class="rating">
+            {% if average_rating > 0 %}
+                <div class="star-rating" data-rating="{{ average_rating }}"></div>
+            {% else %}
+                <p>No ratings yet</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<h2>Reviews</h2>
+<ul>
+    {% for review in teacher.reviews %}
+        <li>
+            <strong>{{ review.author }}</strong> - {{ review.created_at.strftime('%Y-%m-%d') }}
+            <p>{{ review.content }}</p>
+            <div class="star-rating" data-rating="{{ review.rating }}"></div>
+        </li>
+    {% endfor %}
+</ul>
+
+<h2>Add a Review</h2>
+<form method="POST" action="{{ url_for('add_review', teacher_id=teacher.id) }}" id="review-form">
+    {{ form.hidden_tag() }}
+    <div>
+        {{ form.author.label }}<br>
+        {{ form.author(size=32) }}
+    </div>
+    <div>
+        {{ form.content.label }}<br>
+        {{ form.content(rows=5, cols=40) }}
+    </div>
+    <div class="star-rating-input">
+        {% for i in range(1, 6) %}
+            <span class="star" data-value="{{ i }}" id="star{{ i }}">&#9733;</span>
+        {% endfor %}
+        <input type="hidden" name="rating" id="rating" value="0">
+    </div>
+    <div>
+        {{ form.submit() }}
+    </div>
+</form>
+{% endblock %}

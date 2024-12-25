@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Список преподавателей ГУАП
+{% endblock %}
+
+{% block body %}
+<h1>Список преподавателей</h1>
+<div class="teachers">
+    {% for teacher in teachers %}
+    <a href="{{ url_for('teacher_detail', teacher_id=teacher.id) }}" class="teacher-block">
+            <div class="teacher-photo">
+                {% if teacher.photo %}
+                    <img src="data:image/jpeg;base64,{{ teacher.photo | b64encode }}" alt="{{ teacher.name }}">
+                {% else %}
+                    <img src="{{ url_for('static', filename='no-photo.jpg') }}" alt="No photo available">
+                {% endif %}
+            </div>
+            <div class="teacher-info">
+                <h2>{{ teacher.name }}</h2>
+                <p>{{ teacher.job_title }}</p>
+            </div>
+        </a>
+    {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,172 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.teachers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.teacher-block {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+    background-color: #e0f7fa; /* Светло-голубой цвет для выделения */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    text-decoration: none; /* Убираем подчеркивание ссылки */
+    color: inherit; /* Наследуем цвет текста */
+}
+
+.teacher-block:hover {
+    background-color: #b2ebf2; /* Изменение цвета при наведении */
+}
+
+.teacher-photo {
+    margin-right: 20px;
+}
+
+.teacher-photo img {
+    max-width: 200px; /* Увеличение фото в 2 раза */
+    max-height: 200px;
+    border-radius: 8px;
+}
+
+.teacher-info {
+    flex-grow: 1;
+}
+
+.teacher-info h2 {
+    margin: 0 0 5px;
+    color: #333;
+    font-size: 1.5em; /* Увеличение размера шрифта для имени */
+}
+
+.teacher-info p {
+    margin: 0;
+    color: #666;
+    font-size: 1em; /* Увеличение размера шрифта для должности */
+}
+
+.teacher-detail {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 10px 0;
+    padding: 20px;
+    width: 100%;
+    background-color: #e0f7fa; /* Светло-голубой цвет для выделения */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.teacher-detail .teacher-photo {
+    margin-right: 20px;
+}
+
+.teacher-detail .teacher-photo img {
+    max-width: 200px; /* Увеличение фото в 2 раза */
+    max-height: 200px;
+    border-radius: 8px;
+}
+
+.teacher-detail .teacher-info {
+    flex-grow: 1;
+}
+
+.teacher-detail .teacher-info h2 {
+    margin: 0 0 5px;
+    color: #333;
+    font-size: 1.5em; /* Увеличение размера шрифта для должности */
+}
+
+.rating {
+    margin-top: 10px;
+    font-size: 1.2em;
+    color: #ff9800; /* Цвет для рейтинга */
+}
+
+h2 {
+    color: #333;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+form {
+    margin-top: 20px;
+}
+
+form div {
+    margin-bottom: 10px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+form button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #45a049;
+}
+
+.star-rating, .star-rating-input {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.star-rating .star, .star-rating-input .star {
+    font-size: 2em;
+    cursor: pointer;
+    margin: 0 2px;
+}
+
+.star-rating-input .star:hover,
+.star-rating-input .star:hover ~ .star {
+    color: gold;
+}

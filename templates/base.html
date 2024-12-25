@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <title>{% block title%}{% endblock %}</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav class="hat">
+                <a href="{{ url_for('teachers_list') }}">Список преподавателей</a>
+                {% if current_user.is_authenticated %}
+                    {% if current_user.is_admin %}
+                        <a href="{{ url_for('add_teacher') }}">Добавить преподавателя</a>
+                    {% endif %}
+                    <a href="{{ url_for('logout') }}" onclick="return confirm('Вы уверены, что хотите выйти?');">Выйти</a>
+                {% else %}
+                    <a href="{{ url_for('register') }}">Зарегистрироваться</a>
+                    <a href="{{ url_for('login') }}">Войти</a>
+                {% endif %}
+            </nav>
+        </header>
+        {% block body %}{% endblock %}
+    </div>
+</body>
+</html>

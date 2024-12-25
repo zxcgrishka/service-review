@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Добавить преподавателя
+{% endblock %}
+
+{% block body %}
+
+<div class="input_info_about_teacher">
+    <form action="/add_teacher" method="POST" enctype="multipart/form-data">
+        <label for="teacher_name">Teacher's Name:</label><br>
+        <input type="text" id="teacher_name" name="teacher_name" required><br><br>
+
+        <label for="job_title">Job Title:</label><br>
+        <input type="text" id="job_title" name="job_title" required><br><br>
+
+        <label for="photo">Upload Photo (optional):</label><br>
+        <input type="file" id="photo" name="photo" accept="image/*"><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+{% endblock %}
