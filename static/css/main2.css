@@ -1,0 +1,56 @@
+/* Стили для звезд */
+.star {
+    font-size: 30px;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+/* Подсвечиваем звезды при наведении */
+.star.hovered {
+    color: gold;
+}
+
+/* Фиксируем звезды при клике */
+.star.filled {
+    color: gold;
+}
+
+/* Скрываем сами радиокнопки */
+.star-input {
+    display: none;
+}
+
+h1 {
+    text-align: center;
+}
+
+body {
+    font-family: Century Gothic;
+}
+
+header {
+    background-color: #ffffff;
+    color: white;
+    padding: 10px 0;
+    margin-top: 20px;
+    position: sticky;
+    top: 0;
+}
+
+.hat {
+    text-align: center;
+}
+    
+.hat a {
+    color: rgb(0, 0, 0);
+    margin: 0 80px;
+    text-decoration: none;
+    font-size: 30px;
+    display: inline-block; 
+    transition: transform 0.3s ease;
+}
+    
+.hat a:hover {
+    transform: scale(1.2);
+}

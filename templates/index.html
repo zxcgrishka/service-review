@@ -6,6 +6,25 @@
 
 {% block body %}
 <h1>Список преподавателей</h1>
+
+<div class="search">
+    <form action="{{ url_for('search') }}" method="GET">
+        <input type="text" name="searching" placeholder="Введите имя преподавателя">
+        <button type="submit">Поиск</button>
+    </form>
+</div>
+{% if results %}
+    <ul>
+        {% for element in results %}
+            <li>
+                <a href="{{ url_for('teacher_detail', teacher_id=element.id) }}"> {{ element.name }} </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% elif searching_table %}
+    <p>Ничего не найдено.</p>
+{% endif %}
+
 <div class="teachers">
     {% for teacher in teachers %}
     <a href="{{ url_for('teacher_detail', teacher_id=teacher.id) }}" class="teacher-block">
@@ -19,6 +38,15 @@
             <div class="teacher-info">
                 <h2>{{ teacher.name }}</h2>
                 <p>{{ teacher.job_title }}</p>
+                <div class="average-rating">
+                    {% for i in range(5) %}
+                        {% if i < teacher.average_rating %}
+                            <span class="star filled">&#9733;</span>
+                        {% else %}
+                            <span class="star">&#9734;</span>
+                        {% endif %}
+                    {% endfor %}
+                </div>
             </div>
         </a>
     {% endfor %}

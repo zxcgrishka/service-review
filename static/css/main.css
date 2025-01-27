@@ -1,172 +1,227 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+/* Стили для звезд */
+.star {
+    font-size: 30px;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
 }
 
-.container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
+/* Подсвечиваем звезды при наведении */
+.star.hovered {
+    color: gold;
+}
+
+/* Фиксируем звезды при клике */
+.star.filled {
+    color: gold;
+}
+
+/* Скрываем сами радиокнопки */
+.star-input {
+    display: none;
 }
 
 h1 {
     text-align: center;
-    color: #333;
 }
 
+body {
+    font-family: Century Gothic;
+}
+
+header {
+    background-color: #ffffff;
+    color: white;
+    padding: 10px 0;
+    margin-top: 20px;
+    position: sticky;
+    top: 0;
+}
+
+.hat {
+    text-align: center;
+}
+    
+.hat a {
+    color: rgb(0, 0, 0);
+    margin: 0 80px;
+    text-decoration: none;
+    font-size: 30px;
+    display: inline-block; 
+    transition: transform 0.3s ease;
+}
+    
+.hat a:hover {
+    transform: scale(1.2);
+}
+
+
+.search {
+    margin-bottom: 20px;
+}
+
+/* Основные стили для контейнера учителей */
 .teachers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Стили для блока учителя */
+.teacher-block {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.teacher-block {
-    display: flex;
-    align-items: center;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    margin: 10px 0;
-    padding: 10px;
-    width: 100%;
-    background-color: #e0f7fa; /* Светло-голубой цвет для выделения */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    text-decoration: none; /* Убираем подчеркивание ссылки */
-    color: inherit; /* Наследуем цвет текста */
+    text-decoration: none;
+    color: inherit;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 300px;
 }
 
 .teacher-block:hover {
-    background-color: #b2ebf2; /* Изменение цвета при наведении */
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+/* Стили для контейнера с фото учителя */
 .teacher-photo {
-    margin-right: 20px;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
 }
 
+/* Стили для фото учителя */
 .teacher-photo img {
-    max-width: 200px; /* Увеличение фото в 2 раза */
-    max-height: 200px;
-    border-radius: 8px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
+/* Стили для информации о учителе */
 .teacher-info {
-    flex-grow: 1;
+    padding: 20px;
+    text-align: center;
 }
 
 .teacher-info h2 {
-    margin: 0 0 5px;
+    margin: 0;
+    font-size: 1.2em;
     color: #333;
-    font-size: 1.5em; /* Увеличение размера шрифта для имени */
 }
 
 .teacher-info p {
-    margin: 0;
-    color: #666;
-    font-size: 1em; /* Увеличение размера шрифта для должности */
+    margin: 5px 0;
+    font-size: 0.9em;
+    color: #777;
 }
 
-.teacher-detail {
+/* Стили для рейтинга */
+.average-rating {
     display: flex;
-    align-items: center;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    margin: 10px 0;
-    padding: 20px;
-    width: 100%;
-    background-color: #e0f7fa; /* Светло-голубой цвет для выделения */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
-.teacher-detail .teacher-photo {
-    margin-right: 20px;
-}
-
-.teacher-detail .teacher-photo img {
-    max-width: 200px; /* Увеличение фото в 2 раза */
-    max-height: 200px;
-    border-radius: 8px;
-}
-
-.teacher-detail .teacher-info {
-    flex-grow: 1;
-}
-
-.teacher-detail .teacher-info h2 {
-    margin: 0 0 5px;
-    color: #333;
-    font-size: 1.5em; /* Увеличение размера шрифта для должности */
-}
-
-.rating {
+    justify-content: center;
     margin-top: 10px;
+}
+
+.average-rating .star {
     font-size: 1.2em;
-    color: #ff9800; /* Цвет для рейтинга */
+    color: #ddd;
+    margin: 0 2px;
 }
 
-h2 {
-    color: #333;
+.average-rating .star.filled {
+    color: #ffd700;
 }
 
+/* Стили для контейнера поиска */
+.search {
+    margin: 20px 0;
+    text-align: center;
+}
+
+/* Стили для формы поиска */
+.search form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Стили для поля ввода */
+.search input[type="text"] {
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 300px;
+    outline: none;
+}
+
+.search input[type="text"]:focus {
+    border-color: #363636;
+    box-shadow: 0 0 5px #363636
+}
+
+/* Стили для кнопки поиска */
+.search button {
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #363636;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search button:hover {
+    background-color: #000000;
+}
+
+/* Стили для списка результатов */
 ul {
     list-style-type: none;
     padding: 0;
+    margin: 20px 0;
 }
 
 ul li {
     margin: 10px 0;
     padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
     background-color: #f9f9f9;
-}
-
-form {
-    margin-top: 20px;
-}
-
-form div {
-    margin-bottom: 10px;
-}
-
-form label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-form input, form textarea {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
-form button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+ul li:hover {
+    background-color: #f1f1f1;
 }
 
-form button:hover {
-    background-color: #45a049;
+ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.1em;
 }
 
-.star-rating, .star-rating-input {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
+ul li a:hover {
+    color: #000000;
 }
 
-.star-rating .star, .star-rating-input .star {
-    font-size: 2em;
-    cursor: pointer;
-    margin: 0 2px;
+/* Стили для сообщения "Ничего не найдено" */
+p {
+    text-align: center;
+    color: #777;
+    font-size: 1.2em;
+    margin: 20px 0;
 }
+/* Стили для сообщения "Ничего не найдено" */
 
-.star-rating-input .star:hover,
-.star-rating-input .star:hover ~ .star {
-    color: gold;
-}
+
+
+

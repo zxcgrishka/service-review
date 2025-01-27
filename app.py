@@ -1,13 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin, login_user, logout_user, login_required
+from flask_login import UserMixin, login_user, logout_user, login_required, LoginManager
 from werkzeug.security import generate_password_hash, check_password_hash
 import base64
-from flask_login import LoginManager
 from datetime import datetime
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, SubmitField, IntegerField
+from wtforms import TextAreaField, SubmitField, IntegerField, BooleanField
 from wtforms.validators import DataRequired, NumberRange
+from flask_login import current_user
 
 class Config:
     SQLALCHEMY_DATABASE_URI = 'sqlite:///lr_queue.db'
@@ -18,7 +18,6 @@ class Config:
 db = SQLAlchemy()
 login_manager = LoginManager()
 login_manager.login_view = 'login'
-
 
 def create_app():
     app = Flask(__name__)
@@ -33,14 +32,12 @@ def create_app():
 
 app = create_app()
 
-
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
-
 
 class Teachers_list(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -49,21 +46,28 @@ class Teachers_list(db.Model):
     photo = db.Column(db.LargeBinary, nullable=True)
     reviews = db.relationship('Review', backref='teacher', lazy=True)
 
+    @property
+    def average_rating(self):
+        if not self.reviews:
+            return 0.0
+        return round(sum(review.rating for review in self.reviews) / len(self.reviews), 1)
+
 
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     teacher_id = db.Column(db.Integer, db.ForeignKey('teachers_list.id'), nullable=False)
     author = db.Column(db.String(80), nullable=False)
     content = db.Column(db.Text, nullable=False)
+    rating = db.Column(db.Integer, nullable=False)  # Новое поле для рейтинга
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    rating = db.Column(db.Integer, nullable=False)
+    is_anonymous = db.Column(db.Boolean, default=False)
 
 
 class ReviewForm(FlaskForm):
-    author = StringField('Author', validators=[DataRequired()])
     content = TextAreaField('Content', validators=[DataRequired()])
-    submit = SubmitField('Submit')
     rating = IntegerField('Rating', validators=[DataRequired(), NumberRange(min=1, max=5)])
+    is_anonymous = BooleanField('Submit anonymously')  # Флажок для анонимности
+    submit = SubmitField('Submit')
 
 
 @app.template_filter('b64encode')
@@ -72,17 +76,14 @@ def b64encode_filter(data):
         return base64.b64encode(data).decode('utf-8')
     return None
 
-
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-
 @app.route('/')
 def teachers_list():
-    teachers = Teachers_list.query.all()
+    teachers = Teachers_list.query.order_by(Teachers_list.name).all()
     return render_template('index.html', teachers=teachers)
-
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -99,7 +100,6 @@ def register():
 
     return render_template('register.html')
 
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -115,19 +115,16 @@ def login():
 
     return render_template('login.html')
 
-
 @app.route('/dashboard')
 @login_required
 def dashboard():
     return redirect(url_for('teachers_list'))
-
 
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('login'))
-
 
 @app.route('/add_teacher', methods=['GET', 'POST'])
 def add_teacher():
@@ -149,37 +146,48 @@ def add_teacher():
 
     return render_template('add_teacher.html')
 
-
 @app.route('/teacher/<int:teacher_id>')
 def teacher_detail(teacher_id):
     teacher = Teachers_list.query.get_or_404(teacher_id)
-    average_rating = calculate_average_rating(teacher.reviews)
-    return render_template('teacher_detail.html', teacher=teacher, form=ReviewForm(), average_rating=average_rating)
+    reviews = Review.query.filter_by(teacher_id=teacher_id).order_by(Review.created_at.desc()).all()
+    return render_template(
+        'teacher_detail.html',
+        teacher=teacher,
+        form=ReviewForm(),
+        is_authenticated=current_user.is_authenticated
+    )
 
 
 @app.route('/teacher/<int:teacher_id>/review', methods=['POST'])
+@login_required
 def add_review(teacher_id):
     form = ReviewForm()
     if form.validate_on_submit():
-        new_review = Review(
-            teacher_id=teacher_id,
-            author=form.author.data,
-            content=form.content.data,
-            rating=form.rating.data
-        )
-        db.session.add(new_review)
-        db.session.commit()
-        flash('Review added successfully!', 'success')
+        try:
+            new_review = Review(
+                teacher_id=teacher_id,
+                author="Anonymous" if form.is_anonymous.data else current_user.username,
+                content=form.content.data,
+                rating=form.rating.data,
+                is_anonymous=form.is_anonymous.data
+            )
+            db.session.add(new_review)
+            db.session.commit()
+            flash('Review and rating added successfully!', 'success')
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Error adding review: {e}', 'danger')
         return redirect(url_for('teacher_detail', teacher_id=teacher_id))
+    flash('Invalid form submission', 'danger')
     return redirect(url_for('teacher_detail', teacher_id=teacher_id))
 
-
-def calculate_average_rating(reviews):
-    if not reviews:
-        return 0
-    total_rating = sum(review.rating for review in reviews)
-    return round(total_rating / len(reviews), 1)
-
+@app.route('/search', methods=['GET'])
+def search():
+    searching = request.args.get('searching')
+    results = []
+    if searching:
+        results = Teachers_list.query.filter(Teachers_list.name.ilike(f'%{searching}%')).all()
+    return render_template('index.html', searching=searching, results=results)
 
 if __name__ == '__main__':
     with app.app_context():
