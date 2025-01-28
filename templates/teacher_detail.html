@@ -30,7 +30,39 @@
             {% endfor %}
         </div>
     </div>
-
+    <div class="add_review1">
+        <h2>Добавить отзыв</h2>
+        {% if is_authenticated %}
+            <div class="review_about">
+                <form method="POST" action="{{ url_for('add_review', teacher_id=teacher.id) }}" id="review-form">
+                    {{ form.hidden_tag() }}
+                    <div>
+                        {{ form.content.label }}<br>
+                        {{ form.content(rows=5, cols=40) }}
+                    </div>
+                    <div class="rating-and-anonymous">
+                        <div class="rating">
+                            <div class="stars">
+                                {% for i in range(5) %}
+                                    <input type="radio" id="star{{ i + 1 }}" name="rating" value="{{ i + 1 }}" class="star-input" required>
+                                    <label for="star{{ i + 1 }}" class="star">&#9733;</label>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="anonymous-flag">
+                            {{ form.is_anonymous.label }}<br>
+                            {{ form.is_anonymous }}
+                        </div>
+                    </div>
+                    <div>
+                        {{ form.submit() }}
+                    </div>
+                </form>
+            </div>
+        {% else %}
+            <p>Вы должны <a href="{{ url_for('login') }}">войти</a>, чтобы оставить отзыв.</p>
+        {% endif %}
+    </div>
     <div class="review_list">
         <h2>Отзывы</h2>
         <ul>
@@ -50,38 +82,6 @@
                 </li>
             {% endfor %}
         </ul>
-    </div>
-
-    <div class="add_review1">
-        <h2>Добавить отзыв</h2>
-        {% if is_authenticated %}
-            <div class="review_about">
-                <form method="POST" action="{{ url_for('add_review', teacher_id=teacher.id) }}" id="review-form">
-                    {{ form.hidden_tag() }}
-                    <div>
-                        {{ form.content.label }}<br>
-                        {{ form.content(rows=5, cols=40) }}
-                    </div>
-                    <div class="rating">
-                        <div class="stars">
-                            {% for i in range(5) %}
-                                <input type="radio" id="star{{ i + 1 }}" name="rating" value="{{ i + 1 }}" class="star-input" required>
-                                <label for="star{{ i + 1 }}" class="star">&#9733;</label>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <div>
-                        {{ form.is_anonymous.label }}<br>
-                        {{ form.is_anonymous }}
-                    </div>
-                    <div>
-                        {{ form.submit() }}
-                    </div>
-                </form>
-            </div>
-        {% else %}
-            <p>Вы должны <a href="{{ url_for('login') }}">войти</a>, чтобы оставить отзыв.</p>
-        {% endif %}
     </div>
 </div>
 {% endblock %}

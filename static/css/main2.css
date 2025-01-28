@@ -54,3 +54,247 @@ header {
 .hat a:hover {
     transform: scale(1.2);
 }
+
+/* Общие стили для контейнера */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+/* Стили для блока с информацией о преподавателе */
+.teacher-detail {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.teacher-detail h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.teacher-photo img {
+    max-width: 200px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.teacher-info h2 {
+    font-size: 1.8em;
+    color: #34495e;
+    margin-bottom: 10px;
+}
+
+/* Стили для списка отзывов */
+.review_list {
+    margin-bottom: 40px;
+}
+
+.review_list h2 {
+    font-size: 2em;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.review_list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.review_list li {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.review_list li strong {
+    font-size: 1.2em;
+    color: #34495e;
+}
+
+.review_list li p {
+    margin-top: 10px;
+    font-size: 1em;
+    color: #555;
+}
+
+/* Стили для формы добавления отзыва */
+.add_review1 {
+    margin-bottom: 40px;
+}
+
+.add_review1 h2 {
+    font-size: 2em;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.review_about form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.review_about form div {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Расстояние между элементами */
+}
+
+.review_about form label {
+    font-size: 1.1em;
+    color: #34495e;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.review_about form textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1.2em;
+    resize: vertical;
+    flex: 1; /* Занимает всё доступное пространство */
+}
+
+.review_about form .checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.review_about form input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+}
+
+.review_about form input[type="submit"] {
+    background-color: #3498db;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    flex: 0 0 auto; /* Не растягивается, сохраняет свои размеры */
+}
+
+.review_about form input[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+/* Стили для ссылки на вход */
+.add_review1 p {
+    font-size: 1.1em;
+    color: #34495e;
+}
+
+.add_review1 p a {
+    color: #3498db;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.add_review1 p a:hover {
+    color: #2980b9;
+}
+
+.add_review1 {
+    margin-bottom: 40px;
+}
+
+.add_review1 h2 {
+    font-size: 2em;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.review_about form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.review_about form div {
+    margin-bottom: 15px;
+}
+
+.review_about form label {
+    font-size: 1.1em;
+    color: #34495e;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.review_about form textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1.2em;
+    resize: vertical;
+}
+
+.rating-and-anonymous {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Расстояние между звёздами и флагом анонимности */
+    margin-bottom: 15px;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+}
+
+.stars {
+    font-size: 2em; /* Увеличиваем размер звёзд */
+    color: gold; /* Цвет звёзд */
+}
+
+.star-input {
+    display: none; /* Скрываем радиокнопки */
+}
+
+.star {
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.star:hover,
+.star-input:checked ~ .star {
+    color: orange; /* Цвет при наведении или выборе */
+}
+
+.anonymous-flag {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Расстояние между текстом и чекбоксом */
+}
+
+.review_about form input[type="submit"] {
+    background-color: #3498db;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.review_about form input[type="submit"]:hover {
+    background-color: #2980b9;
+}
