@@ -72,8 +72,12 @@ header {
 .teachers {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center; /* Центрирование по вертикали */
     gap: 20px;
     padding: 20px;
+    margin: 0 auto; /* Центрирование контейнера на странице */
+    max-width: 1400px;
 }
 
 /* Стили для блока учителя */
@@ -148,12 +152,14 @@ header {
 
 /* Стили для контейнера поиска */
 .search {
+    font-family: Century Gothic;
     margin: 20px 0;
     text-align: center;
 }
 
 /* Стили для формы поиска */
 .search form {
+    font-family: Century Gothic;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -161,7 +167,9 @@ header {
 }
 
 /* Стили для поля ввода */
+
 .search input[type="text"] {
+    font-family: Century Gothic;
     padding: 10px;
     font-size: 1em;
     border: 1px solid #ccc;
@@ -177,6 +185,7 @@ header {
 
 /* Стили для кнопки поиска */
 .search button {
+    font-family: Century Gothic;
     padding: 10px 20px;
     font-size: 1em;
     color: #fff;
@@ -229,7 +238,71 @@ p {
     margin: 20px 0;
 }
 
+.register {
+    font-family: 'Century Gothic';
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border: 2px solid #000;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
+.register h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #000;
+}
+
+.register form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.register label {
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #000;
+}
+
+.register input[type="text"],
+.register input[type="password"],
+.register input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 18px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.register button {
+    font-family: 'Century Gothic';
+    padding: 10px 20px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.register button:hover {
+    background-color: #555;
+}
+
+.big_register {
+    display: flex;
+    justify-content: center;
+    margin-top: 150px;
+}
 
 
 

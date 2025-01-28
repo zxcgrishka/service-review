@@ -65,15 +65,16 @@ header {
 
 /* Общие стили для контейнера */
 .container {
-    max-width: 800px;
+    font-family: Century Gothic;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 20px;
-    font-family: Arial, sans-serif;
-    color: #333;
+    color: #000000;
 }
 
 /* Стили для блока с информацией о преподавателе */
 .teacher-detail {
+    font-family: Century Gothic;
     text-align: center;
     margin-bottom: 40px;
 }
@@ -81,30 +82,32 @@ header {
 .teacher-detail h1 {
     font-size: 2.5em;
     margin-bottom: 10px;
-    color: #2c3e50;
+    color: #000000;
 }
 
 .teacher-photo img {
-    max-width: 200px;
+    max-width: 400px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(61, 61, 61, 0.1);
     margin-bottom: 20px;
 }
 
 .teacher-info h2 {
     font-size: 1.8em;
-    color: #34495e;
+    color: #4d4d4d;
     margin-bottom: 10px;
 }
 
 /* Стили для списка отзывов */
 .review_list {
+    font-family: Century Gothic;
     margin-bottom: 40px;
 }
 
 .review_list h2 {
+    font-family: Century Gothic;
     font-size: 2em;
-    color: #2c3e50;
+    color: #292929;
     margin-bottom: 20px;
 }
 
@@ -123,7 +126,7 @@ header {
 
 .review_list li strong {
     font-size: 1.2em;
-    color: #34495e;
+    color: #000000;
 }
 
 .review_list li p {
@@ -134,12 +137,13 @@ header {
 
 /* Стили для формы добавления отзыва */
 .add_review1 {
+    font-family: Century Gothic;
     margin-bottom: 40px;
 }
 
 .add_review1 h2 {
     font-size: 2em;
-    color: #2c3e50;
+    color: #000000;
     margin-bottom: 20px;
 }
 
@@ -187,7 +191,7 @@ header {
 }
 
 .review_about form input[type="submit"] {
-    background-color: #3498db;
+    background-color: #292929;
     color: white;
     padding: 15px 30px;
     border: none;
@@ -199,23 +203,23 @@ header {
 }
 
 .review_about form input[type="submit"]:hover {
-    background-color: #2980b9;
+    background-color: #000000;
 }
 
 /* Стили для ссылки на вход */
 .add_review1 p {
     font-size: 1.1em;
-    color: #34495e;
+    color: #3d3d3d;
 }
 
 .add_review1 p a {
-    color: #3498db;
+    color: #004ef7;
     text-decoration: none;
     transition: color 0.2s;
 }
 
 .add_review1 p a:hover {
-    color: #2980b9;
+    color: #000000;
 }
 
 .add_review1 {
@@ -224,7 +228,7 @@ header {
 
 .add_review1 h2 {
     font-size: 2em;
-    color: #2c3e50;
+    color: #292929;
     margin-bottom: 20px;
 }
 
@@ -241,7 +245,7 @@ header {
 
 .review_about form label {
     font-size: 1.1em;
-    color: #34495e;
+    color: #292929;
     display: block;
     margin-bottom: 5px;
 }
@@ -281,11 +285,6 @@ header {
     transition: color 0.2s;
 }
 
-.star:hover,
-.star-input:checked ~ .star {
-    color: orange; /* Цвет при наведении или выборе */
-}
-
 .anonymous-flag {
     display: flex;
     align-items: center;
@@ -293,7 +292,8 @@ header {
 }
 
 .review_about form input[type="submit"] {
-    background-color: #3498db;
+    font-family: Century Gothic;
+    background-color: #292929;
     color: white;
     padding: 15px 30px;
     border: none;
@@ -304,5 +304,5 @@ header {
 }
 
 .review_about form input[type="submit"]:hover {
-    background-color: #2980b9;
+    background-color: #000000;
 }
