@@ -58,7 +58,7 @@ class Review(db.Model):
     teacher_id = db.Column(db.Integer, db.ForeignKey('teachers_list.id'), nullable=False)
     author = db.Column(db.String(80), nullable=False)
     content = db.Column(db.Text, nullable=False)
-    rating = db.Column(db.Integer, nullable=False)  # Новое поле для рейтинга
+    rating = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     is_anonymous = db.Column(db.Boolean, default=False)
 
@@ -66,7 +66,7 @@ class Review(db.Model):
 class ReviewForm(FlaskForm):
     content = TextAreaField('Content', validators=[DataRequired()])
     rating = IntegerField('Rating', validators=[DataRequired(), NumberRange(min=1, max=5)])
-    is_anonymous = BooleanField('Submit anonymously')  # Флажок для анонимности
+    is_anonymous = BooleanField('Submit anonymously')
     submit = SubmitField('Submit')
 
 
@@ -192,4 +192,4 @@ def search():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
