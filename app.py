@@ -8,11 +8,20 @@ from flask_wtf import FlaskForm
 from wtforms import TextAreaField, SubmitField, IntegerField, BooleanField
 from wtforms.validators import DataRequired, NumberRange
 from flask_login import current_user
+import os
 
 class Config:
     SQLALCHEMY_DATABASE_URI = 'sqlite:///lr_queue.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SECRET_KEY = 'supersecretkey'
+    SECRET_KEY = os.environ.get('SECRET_KEY', 'default-secret-key-for-development')
+
+    # Настройки базы данных
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', 'sqlite:///lr_queue.db')
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    # Режим отладки
+    FLASK_ENV = os.environ.get('FLASK_ENV', 'development')
+    DEBUG = FLASK_ENV == 'development'
 
 # Инициализация приложения
 db = SQLAlchemy()
