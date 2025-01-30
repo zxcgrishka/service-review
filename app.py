@@ -11,8 +11,6 @@ from flask_login import current_user
 import os
 
 class Config:
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///lr_queue.db'
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = os.environ.get('SECRET_KEY', 'default-secret-key-for-development')
 
     # Настройки базы данных
