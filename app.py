@@ -14,9 +14,9 @@ class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY', 'default-secret-key-for-development')
 
     # Настройки базы данных
-    SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', '').replace(
-        'postgresql://', 'postgresql+psycopg2://'
-    ) or 'sqlite:///lr_queue.db'
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', '').replace(  # Убрано дублирование
+        'postgres://', 'postgresql+psycopg2://', 1  # Меняем исходный протокол Render
+    ) + '?sslmode=require'  # Добавляем SSL
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Режим отладки
