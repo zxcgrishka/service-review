@@ -12,34 +12,23 @@ import os
 
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY', 'default-secret-key-for-development')
-
-    # Настройки базы данных
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', '').replace(  # Убрано дублирование
-        'postgres://', 'postgresql+psycopg2://', 1  # Меняем исходный протокол Render
-    ) + '?sslmode=require'  # Добавляем SSL
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', '').replace(
+        'postgres://', 'postgresql+psycopg2://', 1
+    ) + '?sslmode=require'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-
-    # Режим отладки
     FLASK_ENV = os.environ.get('FLASK_ENV', 'development')
     DEBUG = FLASK_ENV == 'development'
+
+# Инициализация расширений
+db = SQLAlchemy()
+login_manager = LoginManager()
+login_manager.login_view = 'login'
 
 # Инициализация приложения
 db = SQLAlchemy()
 login_manager = LoginManager()
 login_manager.login_view = 'login'
 
-def create_app():
-    app = Flask(__name__)
-    app.config.from_object(Config)
-    db.init_app(app)
-    login_manager.init_app(app)
-
-    with app.app_context():
-        db.create_all()
-
-    return app
-
-app = create_app()
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -77,6 +66,25 @@ class ReviewForm(FlaskForm):
     rating = IntegerField('Rating', validators=[DataRequired(), NumberRange(min=1, max=5)])
     is_anonymous = BooleanField('Submit anonymously')
     submit = SubmitField('Submit')
+
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object(Config)
+    
+    db.init_app(app)
+    login_manager.init_app(app)
+    
+    # Гарантированное создание таблиц
+    with app.app_context():
+        try:
+            db.create_all()
+            print("✅ Таблицы созданы!")
+        except Exception as e:
+            print(f"❌ Ошибка: {e}")
+    
+    return app
+
+app = create_app()
 
 
 @app.template_filter('b64encode')
@@ -199,6 +207,4 @@ def search():
     return render_template('index.html', searching=searching, results=results)
 
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
     app.run(host="0.0.0.0", port=5000, debug=True)
