@@ -6,6 +6,41 @@
     top: 5px;
 }
 
+@media (min-width: 1350px) {
+    .logo {
+        width: 50px;
+        height: 50px;;
+    } 
+}
+
+@media (max-width: 1350px) {
+    .logo {
+        width: 40px;
+        height: 40px;;
+    }
+}
+
+@media (max-width: 1100px) {
+    .logo {
+        width: 37px;
+        height: 37px;;
+    }    
+}
+
+@media (max-width: 900px) {
+    .logo {
+        width: 30px;
+        height: 30px;;
+    }    
+}
+
+@media (max-width: 650px) {
+    .logo {
+        width: 25px;
+        height: 25px;;
+    }    
+}
+
 /* Стили для звезд */
 .star {
     font-size: 30px;
@@ -35,16 +70,54 @@ h1 {
 
 body {
     font-family: Century Gothic;
+    margin: 0;
 }
 
 header {
-    background-color: #ffffff;
-    color: white;
-    padding: 10px 0;
-    margin-top: 10px;
+    padding: 0;
     position: sticky;
-    box-shadow: 0 4px 8px rgba(61, 61, 61, 0.1);
+    align-items: center;
     top: 0;
+}
+
+.head_svg {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    display: block;
+    z-index: -1;
+    object-fit: cover;
+}
+
+
+@media (min-width: 1350px) {
+    .head_svg {
+        height: 170px;
+    } 
+}
+
+@media (max-width: 1350px) {
+    .head_svg {
+        height: 150px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .head_svg {
+        height: 130px;
+    }
+}
+
+@media (max-width: 900px) {
+    .head_svg {
+        height: 120px;
+    }    
+}
+
+@media (max-width: 650px) {
+    .head_svg {
+        height: 110px;
+    }    
 }
 
 .hat {
@@ -53,11 +126,46 @@ header {
     
 .hat a {
     color: rgb(0, 0, 0);
-    margin: 0 80px;
+    margin: 10px 80px;
     text-decoration: none;
     font-size: 30px;
     display: inline-block; 
     transition: transform 0.3s ease;
+}
+
+@media (min-width: 1350px) {
+    .hat a {
+        font-size: 30px;
+        margin: 10px 70px;
+    } 
+}
+
+@media (max-width: 1350px) {
+    .hat a {
+        font-size: 25px;
+        margin: 10px 60px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .hat a {
+        font-size: 22px;
+        margin: 10px 40px;
+    }    
+}
+
+@media (max-width: 900px) {
+    .hat a {
+        font-size: 17px;
+        margin: 10px 25px;
+    }    
+}
+
+@media (max-width: 650px) {
+    .hat a {
+        font-size: 13px;
+        margin: 10px 10px;
+    }    
 }
     
 .hat a:hover {
@@ -87,7 +195,10 @@ header {
 }
 
 .teacher-photo img {
-    max-width: 400px;
+    width: 400px;
+    height: 500px;
+    object-fit: cover;
+    overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(61, 61, 61, 0.1);
     margin-bottom: 20px;
