@@ -19,11 +19,6 @@ class Config:
     FLASK_ENV = os.environ.get('FLASK_ENV', 'development')
     DEBUG = FLASK_ENV == 'development'
 
-# Инициализация расширений
-db = SQLAlchemy()
-login_manager = LoginManager()
-login_manager.login_view = 'login'
-
 # Инициализация приложения
 db = SQLAlchemy()
 login_manager = LoginManager()
